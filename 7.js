@@ -3,6 +3,33 @@ console.log("Завдання: 7 ==============================");
 // Створюємо функцію task7, яка використовує setInterval та проміси.
 function task7() {
   // Створюємо новий проміс.
+  const newPromise = new Promise((resolve, reject) => {
+    const interval = setInterval(() => {
+      const presentDate = new Date();
+
+      const seconds = presentDate.getSeconds();
+
+      console.log(`Поточні секунди: ${seconds}`);
+
+      if (seconds % 10 === 0) {
+        clearInterval(interval);
+        resolve("Поточні секунди кратні 10!");
+      } else if (seconds % 3 === 0) {
+        clearInterval(interval);
+        reject("Поточні секунди кратні 3!");
+      }
+    }, 1000);
+  });
+  newPromise
+    .then((value) => {
+      console.log(`Проміс зарезолвився з значенням: ${value}`);
+    })
+    .catch((error) => {
+      console.error(`Проміс відхилився з помилкою: ${error}`);
+    })
+    .finally(() => {
+      console.log("Проміс завершено");
+    });
   // Використовуємо функцію setInterval, щоб виконати функцію кожну секунду.
   // Отримаємо поточну дату та час
   // Отримуємо секунди з поточної дати
